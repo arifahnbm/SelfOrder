@@ -1,16 +1,16 @@
 
-<aside id="default-sidebar"
-        class="sidebar fixed top-0 left-0 z-9999 w-64 h-screen border-r border-gray-200 bg-white transition-transform -translate-x-full sm:translate-x-0"
+<aside id="default-sidebar" 
+        class="sidebar fixed top-0 left-0 z-9999 w-64 h-screen border-r border-gray-200 bg-white transition-transform -translate-x-full sm:translate-x-0 dark:border-gray-800 dark:bg-black"
         aria-label="Sidebar">
         {{-- sidebar header --}}
          <div class="sidebar-header flex items-center px-3 pt-5 pb-2 ">
             <a href="{{ route('admin.dashboard') }}">
-            <span class="logo hidden" >
-                {{-- <img class="dark:hidden" src="" alt="Logo">
-                <img class="hidden dark:block" src="" alt="Logo"> --}}
+            <span class="logo" >
+                <img class="dark:hidden" src="{{ asset('src/logo/logo-admin.png')}}" alt="Logo">
+                <img class="hidden dark:block" src="{{ asset('src/logo/logoadmin-dark.png')}}" alt="Logo">
             </span>
 
-            <img class="logo-icon lg:block" src="{{ asset('src/logo/logo-admin.png')}}" alt="Logo">
+            {{-- <img class="logo-icon lg:block" src="{{ asset('src/logo/logo-admin.png')}}" alt="Logo"> --}}
             {{-- <h1 class="text-center font-bold">SelfAdmin</h1> --}}
             </a>
         </div>
@@ -21,10 +21,10 @@
                 <li>
                     <a href="{{ route('admin.dashboard') }}"
                         class="flex items-center p-2 text-gray-900 rounded-lg group {{ request()->routeIs('admin.dashboard') 
-                            ? 'bg-blue-100 text-blue-700 dark:bg-gray-700 dark:text-white' 
+                            ? 'bg-blue-100 text-blue-700 dark:bg-gray-700 dark:text-blue-400 ' 
                             : 'text-gray-900 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700' }}">
                         <svg class="w-5 h-5 transition duration-75 {{ request()->routeIs('admin.dashboard') 
-                            ? 'text-blue-700' 
+                            ? 'text-blue-700 dark:text-blue-400 dark:group-hover:text-sky-300' 
                             : 'text-gray-500 group-hover:text-gray-900 dark:text-gray-400 dark:group-hover:text-white' }}"
                             aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor"
                             viewBox="0 0 22 21">
@@ -53,10 +53,10 @@
                 <li>
                     <a href="{{ route('admin.menu') }}"
                         class="flex items-center p-2 text-gray-900 rounded-lg group {{ request()->routeIs('admin.menu') 
-                            ? 'bg-blue-100 text-blue-700 dark:bg-gray-700 dark:text-white' 
+                            ? 'bg-blue-100 text-blue-700 dark:bg-gray-700 dark:text-blue-400' 
                             : 'text-gray-900 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700' }}">
                         <svg class="shrink-0 w-5 h-5 transition duration-75 {{ request()->routeIs('admin.menu') 
-                            ? 'text-blue-700' 
+                            ? 'text-blue-700 dark:text-blue-400 dark:group-hover:text-sky-300' 
                             : 'text-gray-500 group-hover:text-gray-900 dark:text-gray-400 dark:group-hover:text-white' }}"
                             aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor"
                             viewBox="0 0 20 20">
@@ -71,10 +71,10 @@
                 <li>
                     <a href="{{ route('admin.nomormeja') }}"
                         class="flex items-center p-2 text-gray-900 rounded-lg group {{ request()->routeIs('admin.nomormeja') 
-                            ? 'bg-blue-100 text-blue-700 dark:bg-gray-700 dark:text-white' 
+                            ? 'bg-blue-100 text-blue-700 dark:bg-gray-700 dark:text-blue-400' 
                             : 'text-gray-900 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700' }}">
                         <svg class="shrink-0 w-5 h-5 transition duration-75 {{ request()->routeIs('admin.nomormeja') 
-                            ? 'text-blue-700' 
+                            ? 'text-blue-700 dark:text-blue-400 dark:group-hover:text-sky-300' 
                             : 'text-gray-500 group-hover:text-gray-900 dark:text-gray-400 dark:group-hover:text-white' }}"
                             aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor"
                             viewBox="0 0 20 18">

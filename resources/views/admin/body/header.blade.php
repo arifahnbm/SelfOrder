@@ -10,7 +10,7 @@
       class="flex w-full items-center justify-between gap-2 border-b border-gray-200 px-3 py-3 sm:gap-4 lg:justify-normal lg:border-b-0 lg:px-0 lg:py-4 dark:border-gray-800"
     >
       <!-- Hamburger Toggle BTN -->
-      <button
+      {{-- <button
         :class="sidebarToggle ? 'lg:bg-transparent dark:lg:bg-transparent bg-gray-100 dark:bg-gray-800' : ''"
         class="z-99999 flex h-10 w-10 items-center justify-center rounded-lg border-gray-200 text-gray-500 lg:h-11 lg:w-11 lg:border dark:border-gray-800 dark:text-gray-400"
         @click.stop="sidebarToggle = !sidebarToggle"
@@ -49,7 +49,7 @@
         </svg>
 
         <!-- cross icon -->
-        {{-- <svg
+        <svg
           :class="sidebarToggle ? 'block lg:hidden' : 'hidden'"
           class="fill-current"
           width="24"
@@ -64,8 +64,8 @@
             d="M6.21967 7.28131C5.92678 6.98841 5.92678 6.51354 6.21967 6.22065C6.51256 5.92775 6.98744 5.92775 7.28033 6.22065L11.999 10.9393L16.7176 6.22078C17.0105 5.92789 17.4854 5.92788 17.7782 6.22078C18.0711 6.51367 18.0711 6.98855 17.7782 7.28144L13.0597 12L17.7782 16.7186C18.0711 17.0115 18.0711 17.4863 17.7782 17.7792C17.4854 18.0721 17.0105 18.0721 16.7176 17.7792L11.999 13.0607L7.28033 17.7794C6.98744 18.0722 6.51256 18.0722 6.21967 17.7794C5.92678 17.4865 5.92678 17.0116 6.21967 16.7187L10.9384 12L6.21967 7.28131Z"
             fill=""
           />
-        </svg> --}}
-      </button>
+        </svg>
+      </button> --}}
       <!-- Hamburger Toggle BTN -->
 
       <a href="index.html" class="lg:hidden">
@@ -181,7 +181,7 @@
         </button>
         <!-- Dark Mode Toggler -->
 
-        <!-- Notification Menu Area -->
+        {{-- <!-- Notification Menu Area -->
         <div
           class="relative"
           x-data="{ dropdownOpen: false, notifying: true }"
@@ -596,9 +596,9 @@
             >
               View All Notification
             </a>
-          </div>
+          </div> --}}
           <!-- Dropdown End -->
-        </div>
+        {{-- </div> --}}
         <!-- Notification Menu Area -->
       </div>
 
@@ -614,10 +614,10 @@
           @click.prevent="dropdownOpen = ! dropdownOpen"
         >
           <span class="mr-3 h-11 w-11 overflow-hidden rounded-full">
-            <img src="./images/user/owner.jpg" alt="User" />
+            <img src="{{asset('src/avatar/avatar.jpg')}}" alt="User" />
           </span>
 
-          <span class="text-theme-sm mr-1 block font-medium"> Musharof </span>
+          <span class="text-theme-sm mr-1 block font-medium"> Admin </span>
 
           <svg
             :class="dropdownOpen && 'rotate-180'"
@@ -647,12 +647,12 @@
             <span
               class="text-theme-sm block font-medium text-gray-700 dark:text-gray-400"
             >
-              Musharof Chowdhury
+              Bapak
             </span>
             <span
               class="text-theme-xs mt-0.5 block text-gray-500 dark:text-gray-400"
             >
-              randomuser@pimjo.com
+              admin@gmail.com
             </span>
           </div>
 
