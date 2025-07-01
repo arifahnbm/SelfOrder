@@ -1,12 +1,16 @@
 <?php
 
 namespace App\Http\Controllers;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use App\Models\Menu;
 use App\Models\Category;
 use App\Models\NomorMeja;
+use App\Models\Transaksi;
+use App\Models\PesananDetail;
 use Intervention\Image\ImageManager;
 use Intervention\Image\Drivers\Gd\Driver;
+use Carbon\Carbon;
 
 
 
@@ -244,4 +248,59 @@ class AdminController extends Controller
         return redirect()->back()->with($notification);
 
     }
+
+        public function dashboard()
+    {
+        //Customer
+        $todayCustomer = Transaksi::whereDate('created_at', Carbon::today())->count();
+        $yesterdayCustomer = Transaksi::whereDate('created_at', Carbon::yesterday())->count();
+        $customerChange = $this->calculatePercentage($todayCustomer, $yesterdayCustomer);
+
+
+        //Order
+        $todayMenu = PesananDetail::whereHas('pesanan', function ($query) {
+            $query->whereDate('created_at', Carbon::today())
+                ->where('status', '!=', 'keranjang');
+        })->sum('jumlah');
+        $yesterdayMenu = PesananDetail::whereDate('created_at', Carbon::yesterday())->sum('jumlah');
+        $menuChange = $this->calculatePercentage($todayMenu, $yesterdayMenu);
+
+
+        //Income
+        $todayIncome = Transaksi::whereDate('created_at', Carbon::today())
+                            ->where('status_bayar', 'sudah bayar') 
+                            ->sum('total_bayar');
+        $yesterdayIncome = Transaksi::whereDate('created_at', Carbon::yesterday())
+                    ->where('status_bayar', 'sudah bayar')
+                    ->sum('total_bayar');
+
+        $incomeChange = $this->calculatePercentage($todayIncome, $yesterdayIncome);
+
+        // Income per bulan (total_bayar)
+        $incomeData = Transaksi::selectRaw('MONTH(created_at) as month, SUM(total_bayar) as total')
+    ->whereYear('created_at', Carbon::now()->year)
+    ->where('status_bayar', 'sudah bayar')
+    ->groupBy('month')
+    ->orderBy('month')
+    ->pluck('total')
+    ->toArray();
+
+
+
+        
+        
+
+        return view('admin.dashboard', compact('todayCustomer', 'customerChange',
+        'todayMenu', 'menuChange',
+        'todayIncome', 'incomeChange', 'incomeData'));
+    }
+
+    private function calculatePercentage($today, $yesterday)
+{
+    if ($yesterday == 0) {
+        return $today > 0 ? 100 : 0;
+    }
+
+    return (($today - $yesterday) / $yesterday) * 100;
+}
 }
