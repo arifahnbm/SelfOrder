@@ -21,7 +21,7 @@
                 <div class="p-4 mx-auto max-w-(--breakpoint-2xl) md:p-6">
                     <div class="grid grid-cols-12 gap-4 md:gap-6">
                         <div class="col-span-12 space-y-6">
-                            <!-- Metric Group One -->
+                            <!-- Metric Group -->
                             <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 md:gap-6">
                                 <!-- Metric Item Start -->
                                 <div
@@ -192,206 +192,278 @@
                                 <!-- Metric Item End -->
                             </div>
 
-                            <!-- Metric Group One -->
+                            <!-- Metric Group -->
 
-                            {{-- Chart 1 --}}
+                            {{-- charts  --}}
+                            <div class="grid grid-cols-2 gap-4">
+                                {{-- Chart 1 --}}
+                                <div
+                                    class="overflow-hidden rounded-2xl border border-gray-200 bg-white px-5 pt-5 dark:border-gray-800 dark:bg-white/[0.03] sm:px-6 sm:pt-6" 
 
+                                    >
+                                    <div class="flex items-center justify-between">
+                                        <h3 class="text-lg font-semibold text-gray-800 dark:text-white/90">
+                                        Monthly Income
+                                        </h3>
+                                    </div>
+
+                                    <div class="max-w-full overflow-x-auto custom-scrollbar">
+                                        <div class="-ml-5 min-w-[650px] pl-2 xl:min-w-full">
+                                        <div
+                                            id="chartOne"
+                                            class="-ml-5 h-full min-w-[650px] pl-2 xl:min-w-full"
+                                        ></div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                {{-- Chart 1 end  --}}
+
+                                {{-- chart 2 --}}
+
+                                <div
+                                    class="overflow-hidden rounded-2xl border border-gray-200 bg-white px-5 pt-5 dark:border-gray-800 dark:bg-white/[0.03] sm:px-6 sm:pt-6"
+                                    >
+                                    <div class="flex items-center justify-between">
+                                        <h3 class="text-lg font-semibold text-gray-800 dark:text-white/90">
+                                        Monthly Customers
+                                        </h3>
+                                    </div>
+
+                                    <div class="max-w-full overflow-x-auto custom-scrollbar">
+                                        <div class="-ml-5 min-w-[650px] pl-2 xl:min-w-full">
+                                        <div id="chartCustomer" class="h-full min-w-[650px]"></div>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                {{-- chart 2 end  --}}
+                            </div>
+                            
+                            {{-- charts end  --}}
+
+                            {{-- table  --}}
                             <div
-                                class="overflow-hidden rounded-2xl border border-gray-200 bg-white px-5 pt-5 dark:border-gray-800 dark:bg-white/[0.03] sm:px-6 sm:pt-6" 
-
+                                class="overflow-hidden rounded-2xl border border-gray-200 bg-white px-4 pb-3 pt-4 dark:border-gray-800 dark:bg-white/[0.03] sm:px-6"
                                 >
-                                <div class="flex items-center justify-between">
+                                <div
+                                    class="flex flex-col gap-2 mb-4 sm:flex-row sm:items-center sm:justify-between"
+                                >
+                                    <div>
                                     <h3 class="text-lg font-semibold text-gray-800 dark:text-white/90">
-                                    Monthly Sales
+                                        Transactions
                                     </h3>
+                                    </div>
 
-                                    <div x-data="{openDropDown: false}" class="relative h-fit">
+                                    <div class="flex items-center gap-3">
                                     <button
-                                        @click="openDropDown = !openDropDown"
-                                        :class="openDropDown ? 'text-gray-700 dark:text-white' : 'text-gray-400 hover:text-gray-700 dark:hover:text-white'"
+                                        class="inline-flex items-center gap-2 rounded-lg border border-gray-300 bg-white px-4 py-2.5 text-theme-sm font-medium text-gray-700 shadow-theme-xs hover:bg-gray-50 hover:text-gray-800 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-white/[0.03] dark:hover:text-gray-200"
                                     >
                                         <svg
-                                        class="fill-current"
-                                        width="24"
-                                        height="24"
-                                        viewBox="0 0 24 24"
+                                        class="stroke-current fill-white dark:fill-gray-800"
+                                        width="20"
+                                        height="20"
+                                        viewBox="0 0 20 20"
                                         fill="none"
                                         xmlns="http://www.w3.org/2000/svg"
                                         >
                                         <path
-                                            fill-rule="evenodd"
-                                            clip-rule="evenodd"
-                                            d="M10.2441 6C10.2441 5.0335 11.0276 4.25 11.9941 4.25H12.0041C12.9706 4.25 13.7541 5.0335 13.7541 6C13.7541 6.9665 12.9706 7.75 12.0041 7.75H11.9941C11.0276 7.75 10.2441 6.9665 10.2441 6ZM10.2441 18C10.2441 17.0335 11.0276 16.25 11.9941 16.25H12.0041C12.9706 16.25 13.7541 17.0335 13.7541 18C13.7541 18.9665 12.9706 19.75 12.0041 19.75H11.9941C11.0276 19.75 10.2441 18.9665 10.2441 18ZM11.9941 10.25C11.0276 10.25 10.2441 11.0335 10.2441 12C10.2441 12.9665 11.0276 13.75 11.9941 13.75H12.0041C12.9706 13.75 13.7541 12.9665 13.7541 12C13.7541 11.0335 12.9706 10.25 12.0041 10.25H11.9941Z"
+                                            d="M2.29004 5.90393H17.7067"
+                                            stroke=""
+                                            stroke-width="1.5"
+                                            stroke-linecap="round"
+                                            stroke-linejoin="round"
+                                        />
+                                        <path
+                                            d="M17.7075 14.0961H2.29085"
+                                            stroke=""
+                                            stroke-width="1.5"
+                                            stroke-linecap="round"
+                                            stroke-linejoin="round"
+                                        />
+                                        <path
+                                            d="M12.0826 3.33331C13.5024 3.33331 14.6534 4.48431 14.6534 5.90414C14.6534 7.32398 13.5024 8.47498 12.0826 8.47498C10.6627 8.47498 9.51172 7.32398 9.51172 5.90415C9.51172 4.48432 10.6627 3.33331 12.0826 3.33331Z"
                                             fill=""
+                                            stroke=""
+                                            stroke-width="1.5"
+                                        />
+                                        <path
+                                            d="M7.91745 11.525C6.49762 11.525 5.34662 12.676 5.34662 14.0959C5.34661 15.5157 6.49762 16.6667 7.91745 16.6667C9.33728 16.6667 10.4883 15.5157 10.4883 14.0959C10.4883 12.676 9.33728 11.525 7.91745 11.525Z"
+                                            fill=""
+                                            stroke=""
+                                            stroke-width="1.5"
                                         />
                                         </svg>
+
+                                        Filter
                                     </button>
-                                    <div
-                                        x-show="openDropDown"
-                                        @click.outside="openDropDown = false"
-                                        class="absolute right-0 z-40 w-40 p-2 space-y-1 bg-white border border-gray-200 top-full rounded-2xl shadow-theme-lg dark:border-gray-800 dark:bg-gray-dark"
+
+                                    <button
+                                        class="inline-flex items-center gap-2 rounded-lg border border-gray-300 bg-white px-4 py-2.5 text-theme-sm font-medium text-gray-700 shadow-theme-xs hover:bg-gray-50 hover:text-gray-800 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-white/[0.03] dark:hover:text-gray-200"
                                     >
-                                        <button
-                                        class="flex w-full px-3 py-2 font-medium text-left text-gray-500 rounded-lg text-theme-xs hover:bg-gray-100 hover:text-gray-700 dark:text-gray-400 dark:hover:bg-white/5 dark:hover:text-gray-300"
-                                        >
-                                        View More
-                                        </button>
-                                        <button
-                                        class="flex w-full px-3 py-2 font-medium text-left text-gray-500 rounded-lg text-theme-xs hover:bg-gray-100 hover:text-gray-700 dark:text-gray-400 dark:hover:bg-white/5 dark:hover:text-gray-300"
-                                        >
-                                        Delete
-                                        </button>
-                                    </div>
+                                        See all
+                                    </button>
                                     </div>
                                 </div>
 
-                                <div class="max-w-full overflow-x-auto custom-scrollbar">
-                                    <div class="-ml-5 min-w-[650px] pl-2 xl:min-w-full">
-                                    <div
-                                        id="chartOne"
-                                        class="-ml-5 h-full min-w-[650px] pl-2 xl:min-w-full"
-                                    ></div>
-                                    </div>
+                                <div class="w-full overflow-x-auto">
+                                    <table class="min-w-full">
+                                    <!-- table header start -->
+                                    <thead>
+                                        <tr class="border-gray-100 border-y dark:border-gray-800">
+                                        <th class="py-3">
+                                            <div class="flex items-center">
+                                            <p
+                                                class="font-medium text-gray-500 text-theme-xs dark:text-gray-400"
+                                            >
+                                                Tanggal
+                                            </p>
+                                            </div>
+                                        </th>
+                                        <th class="py-3">
+                                            <div class="flex items-center">
+                                            <p
+                                                class="font-medium text-gray-500 text-theme-xs dark:text-gray-400"
+                                            >
+                                                Meja
+                                            </p>
+                                            </div>
+                                        </th class="py-3">
+                                        <th class="py-3">
+                                            <div class="flex items-center">
+                                            <p
+                                                class="font-medium text-gray-500 text-theme-xs dark:text-gray-400"
+                                            >
+                                                Total Bayar
+                                            </p>
+                                            </div>
+                                        </th>
+                                        <th class="py-3">
+                                            <div class="flex items-center col-span-2">
+                                            <p
+                                                class="font-medium text-gray-500 text-theme-xs dark:text-gray-400"
+                                            >
+                                                Dibayar
+                                            </p>
+                                            </div>
+                                        </th>
+                                        <th class="py-3">
+                                            <div class="flex items-center col-span-2">
+                                            <p
+                                                class="font-medium text-gray-500 text-theme-xs dark:text-gray-400"
+                                            >
+                                                Kembalian
+                                            </p>
+                                            </div>
+                                        </th>
+                                        <th class="py-3">
+                                            <div class="flex items-center col-span-2">
+                                            <p
+                                                class="font-medium text-gray-500 text-theme-xs dark:text-gray-400"
+                                            >
+                                                Metode
+                                            </p>
+                                            </div>
+                                        </th>
+                                        
+                                        </tr>
+                                    </thead>
+                                    <!-- table header end -->
+
+                                    <tbody class="divide-y divide-gray-100 dark:divide-gray-800">
+                                        @foreach ($laporanTransaksi as $transaksi)
+                                        <tr>
+                                        <td class="py-3">
+                                            <div class="flex items-center">
+                                                <div class="flex items-center gap-3">
+                                                    <p
+                                                        class="font-medium text-gray-800 text-theme-sm dark:text-white/90"
+                                                    >
+                                                        {{ \Carbon\Carbon::parse($transaksi->created_at)->format('d M Y H:i') }}
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td class="py-3">
+                                            <div class="flex items-center">
+                                            <p class="text-gray-500 text-theme-sm dark:text-gray-400">
+                                                Meja {{ $transaksi->nomor_meja }}
+                                            </p>
+                                            </div>
+                                        </td>
+                                        <td class="py-3">
+                                            <div class="flex items-center">
+                                            <p class="text-gray-500 text-theme-sm dark:text-gray-400">
+                                                Rp{{ number_format($transaksi->total_bayar, 0, ',', '.') }}
+                                            </p>
+                                            </div>
+                                        </td>
+                                        <td class="py-3">
+                                            <div class="flex items-center">
+                                            <p
+                                                class="text-gray-500 text-theme-sm dark:text-gray-400"
+                                            >
+                                                Rp{{ number_format($transaksi->uang_dibayarkan, 0, ',', '.') }}
+                                            </p>
+                                            </div>
+                                        </td>
+                                        <td class="py-3">
+                                            <div class="flex items-center">
+                                            <p
+                                                class="text-gray-500 text-theme-sm dark:text-gray-400"
+                                            >
+                                                Rp{{ number_format($transaksi->kembalian, 0, ',', '.') }}
+                                            </p>
+                                            </div>
+                                        </td>
+                                        <td class="py-3">
+                                            <div class="flex items-center">
+                                            <p
+                                                class="text-gray-500 text-theme-sm dark:text-gray-400"
+                                            >
+                                                {{ ucfirst($transaksi->metode_pembayaran) }}
+                                            </p>
+                                            </div>
+                                        </td>
+                                        
+                                        </tr>
+                                        @endforeach
+                                        <!-- table item -->
+                                        <!-- table body end -->
+                                    </tbody>
+                                    </table>
                                 </div>
                             </div>
+                            {{-- table end --}}
 
-                            {{-- Chart 1 end  --}}
+                            
+                            
+
                         </div>
 
                         
                     </div>
 
-
-
-                    {{-- <div class="p-4 border-2 border-gray-200 border-dashed rounded-lg dark:border-gray-700">
-                        <div class="grid grid-cols-3 gap-4 mb-4">
-                            <div class="flex items-center justify-center h-24 rounded-sm bg-gray-50 dark:bg-gray-800">
-                                <p class="text-2xl text-gray-400 dark:text-gray-500">
-                                    <svg class="w-3.5 h-3.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
-                                        viewBox="0 0 18 18">
-                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                            d="M9 1v16M1 9h16" />
-                                    </svg>
-                                </p>
-                            </div>
-                            <div class="flex items-center justify-center h-24 rounded-sm bg-gray-50 dark:bg-gray-800">
-                                <p class="text-2xl text-gray-400 dark:text-gray-500">
-                                    <svg class="w-3.5 h-3.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
-                                        viewBox="0 0 18 18">
-                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                            d="M9 1v16M1 9h16" />
-                                    </svg>
-                                </p>
-                            </div>
-                            <div class="flex items-center justify-center h-24 rounded-sm bg-gray-50 dark:bg-gray-800">
-                                <p class="text-2xl text-gray-400 dark:text-gray-500">
-                                    <svg class="w-3.5 h-3.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-                                        fill="none" viewBox="0 0 18 18">
-                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                            stroke-width="2" d="M9 1v16M1 9h16" />
-                                    </svg>
-                                </p>
-                            </div>
-                        </div>
-                        <div class="flex items-center justify-center h-48 mb-4 rounded-sm bg-gray-50 dark:bg-gray-800">
-                            <p class="text-2xl text-gray-400 dark:text-gray-500">
-                                <svg class="w-3.5 h-3.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
-                                    viewBox="0 0 18 18">
-                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                        d="M9 1v16M1 9h16" />
-                                </svg>
-                            </p>
-                        </div>
-                        <div class="grid grid-cols-2 gap-4 mb-4">
-                            <div class="flex items-center justify-center rounded-sm bg-gray-50 h-28 dark:bg-gray-800">
-                                <p class="text-2xl text-gray-400 dark:text-gray-500">
-                                    <svg class="w-3.5 h-3.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-                                        fill="none" viewBox="0 0 18 18">
-                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                            stroke-width="2" d="M9 1v16M1 9h16" />
-                                    </svg>
-                                </p>
-                            </div>
-                            <div class="flex items-center justify-center rounded-sm bg-gray-50 h-28 dark:bg-gray-800">
-                                <p class="text-2xl text-gray-400 dark:text-gray-500">
-                                    <svg class="w-3.5 h-3.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-                                        fill="none" viewBox="0 0 18 18">
-                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                            stroke-width="2" d="M9 1v16M1 9h16" />
-                                    </svg>
-                                </p>
-                            </div>
-                            <div class="flex items-center justify-center rounded-sm bg-gray-50 h-28 dark:bg-gray-800">
-                                <p class="text-2xl text-gray-400 dark:text-gray-500">
-                                    <svg class="w-3.5 h-3.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-                                        fill="none" viewBox="0 0 18 18">
-                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                            stroke-width="2" d="M9 1v16M1 9h16" />
-                                    </svg>
-                                </p>
-                            </div>
-                            <div class="flex items-center justify-center rounded-sm bg-gray-50 h-28 dark:bg-gray-800">
-                                <p class="text-2xl text-gray-400 dark:text-gray-500">
-                                    <svg class="w-3.5 h-3.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-                                        fill="none" viewBox="0 0 18 18">
-                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                            stroke-width="2" d="M9 1v16M1 9h16" />
-                                    </svg>
-                                </p>
-                            </div>
-                        </div>
-                        <div class="flex items-center justify-center h-48 mb-4 rounded-sm bg-gray-50 dark:bg-gray-800">
-                            <p class="text-2xl text-gray-400 dark:text-gray-500">
-                                <svg class="w-3.5 h-3.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
-                                    viewBox="0 0 18 18">
-                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                        d="M9 1v16M1 9h16" />
-                                </svg>
-                            </p>
-                        </div>
-                        <div class="grid grid-cols-2 gap-4">
-                            <div class="flex items-center justify-center rounded-sm bg-gray-50 h-28 dark:bg-gray-800">
-                                <p class="text-2xl text-gray-400 dark:text-gray-500">
-                                    <svg class="w-3.5 h-3.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-                                        fill="none" viewBox="0 0 18 18">
-                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                            stroke-width="2" d="M9 1v16M1 9h16" />
-                                    </svg>
-                                </p>
-                            </div>
-                            <div class="flex items-center justify-center rounded-sm bg-gray-50 h-28 dark:bg-gray-800">
-                                <p class="text-2xl text-gray-400 dark:text-gray-500">
-                                    <svg class="w-3.5 h-3.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-                                        fill="none" viewBox="0 0 18 18">
-                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                            stroke-width="2" d="M9 1v16M1 9h16" />
-                                    </svg>
-                                </p>
-                            </div>
-                            <div class="flex items-center justify-center rounded-sm bg-gray-50 h-28 dark:bg-gray-800">
-                                <p class="text-2xl text-gray-400 dark:text-gray-500">
-                                    <svg class="w-3.5 h-3.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-                                        fill="none" viewBox="0 0 18 18">
-                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                            stroke-width="2" d="M9 1v16M1 9h16" />
-                                    </svg>
-                                </p>
-                            </div>
-                            <div class="flex items-center justify-center rounded-sm bg-gray-50 h-28 dark:bg-gray-800">
-                                <p class="text-2xl text-gray-400 dark:text-gray-500">
-                                    <svg class="w-3.5 h-3.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-                                        fill="none" viewBox="0 0 18 18">
-                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                            stroke-width="2" d="M9 1v16M1 9h16" />
-                                    </svg>
-                                </p>
-                            </div>
-                        </div>
-                    </div> --}}
                 </div>
     </main>
        
-  
+<script>
+    document.querySelectorAll("[data-modal-toggle]").forEach((btn) => {
+        btn.addEventListener("click", () => {
+            const targetId = btn.getAttribute("data-modal-target");
+            document.getElementById(targetId).classList.remove("hidden");
+        });
+    });
+
+    document.querySelectorAll("[data-modal-hide]").forEach((btn) => {
+        btn.addEventListener("click", () => {
+            const modal = btn.closest(".fixed");
+            modal.classList.add("hidden");
+        });
+    });
+</script>
+
 </body>
 
 </html>
@@ -404,4 +476,5 @@
 </script>
 <script>
     const incomeChartData = @json($incomeData ?? []);
+    const customerChartData = @json($customerData ?? []);
 </script>

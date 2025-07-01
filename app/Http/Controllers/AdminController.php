@@ -258,12 +258,30 @@ class AdminController extends Controller
 
 
         //Order
-        $todayMenu = PesananDetail::whereHas('pesanan', function ($query) {
-            $query->whereDate('created_at', Carbon::today())
-                ->where('status', '!=', 'keranjang');
-        })->sum('jumlah');
-        $yesterdayMenu = PesananDetail::whereDate('created_at', Carbon::yesterday())->sum('jumlah');
+        $todayMenu = 0;
+
+        $transaksis = Transaksi::whereDate('created_at', Carbon::today())->get();
+
+        foreach ($transaksis as $transaksi) {
+            $details = json_decode($transaksi->details);
+
+            foreach ($details as $item) {
+                $todayMenu += $item->jumlah;
+            }
+        }
+        $yesterdayMenu = 0;
+
+        $transaksis = Transaksi::whereDate('created_at', Carbon::yesterday())->get();
+
+        foreach ($transaksis as $transaksi) {
+            $details = json_decode($transaksi->details);
+
+            foreach ($details as $item) {
+                $yesterdayMenu += $item->jumlah;
+            }
+        }
         $menuChange = $this->calculatePercentage($todayMenu, $yesterdayMenu);
+
 
 
         //Income
@@ -278,21 +296,30 @@ class AdminController extends Controller
 
         // Income per bulan (total_bayar)
         $incomeData = Transaksi::selectRaw('MONTH(created_at) as month, SUM(total_bayar) as total')
-    ->whereYear('created_at', Carbon::now()->year)
-    ->where('status_bayar', 'sudah bayar')
-    ->groupBy('month')
-    ->orderBy('month')
-    ->pluck('total')
-    ->toArray();
+        ->whereYear('created_at', Carbon::now()->year)
+        ->where('status_bayar', 'sudah bayar')
+        ->groupBy('month')
+        ->orderBy('month')
+        ->pluck('total')
+        ->toArray();
 
+        $customerData = Transaksi::selectRaw('MONTH(created_at) as month, COUNT(*) as total')
+        ->whereYear('created_at', Carbon::now()->year)
+        ->groupBy('month')
+        ->orderBy('month')
+        ->pluck('total')
+        ->toArray();
 
+        $laporanTransaksi = Transaksi::where('status_bayar', 'sudah bayar')
+        ->orderByDesc('created_at')
+        ->limit(10) 
+        ->get();
 
-        
-        
+        $transaksis = Transaksi::latest()->get();
 
-        return view('admin.dashboard', compact('todayCustomer', 'customerChange',
+        return view('admin.dashboard', compact('todayCustomer', 'customerChange', 'customerData',
         'todayMenu', 'menuChange',
-        'todayIncome', 'incomeChange', 'incomeData'));
+        'todayIncome', 'incomeChange', 'incomeData', 'laporanTransaksi', 'transaksis'));
     }
 
     private function calculatePercentage($today, $yesterday)
