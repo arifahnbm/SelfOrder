@@ -21,24 +21,28 @@
     <script src="{{ asset('backend/js/code.js') }}"></script>
 </head>
 
-<body>
+<body x-data="{ 'darkMode': false, 'sidebarToggle': false}" x-init="
+         darkMode = JSON.parse(localStorage.getItem('darkMode'));
+         $watch('darkMode', value => localStorage.setItem('darkMode', JSON.stringify(value)))"
+    :class="{'dark bg-gray-900': darkMode === true}">
     
     @include('kasir.body.sidebar')
+    @include('kasir.body.header')
 
-    <div class="p-4 sm:ml-64">
-        <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+    <div class="p-4">
+        <div class=" overflow-x-auto shadow-md sm:rounded-lg">
 
             <td class="px-6 py-4">
                 <form method="GET" action="{{ route('kasir.pesanan') }}">
-                    <div class="flex align-items-center gap-5 mb-3">
+                    <div class="flex align-items-center gap-5 mb-3 ">
                         <div>
-                            <label for="date" class="form-label">Filter by Date</label>
+                            <label for="date" class="form-label dark:text-white">Filter by Date</label>
                             <input type="date" name="date" value="{{ old('date', date('Y-m-d')) }}"
-                                class="form-control">
+                                class="form-control dark:bg-gray-700 dark:text-white">
                         </div>
                         <div>
-                            <label for="status" class="form-label">Status Pesanan</label>
-                            <select name="status" class="form-select">
+                            <label for="status" class="form-label dark:text-white">Status Pesanan</label>
+                            <select name="status" class="form-select dark:bg-gray-700 dark:text-white">
                                 <option value="">Select Status</option>
                                 <option value="nonaktif" {{ request('status') == 'nonaktif' ? 'selected' : '' }}>
                                     Sudah di Antar</option>
@@ -47,8 +51,8 @@
                             </select>
                         </div>
                         <div>
-                            <label for="status_bayar" class="form-label">Status Pembayaran</label>
-                            <select name="status_bayar" class="form-select">
+                            <label for="status_bayar" class="form-label dark:text-white">Status Pembayaran</label>
+                            <select name="status_bayar" class="form-select dark:bg-gray-700 dark:text-white">
                                 <option value="">Select Status</option>
                                 <option value="sudah bayar"
                                     {{ request('status_bayar') == 'sudah bayar' ? 'selected' : '' }}>
@@ -60,8 +64,8 @@
                         </div>
 
                         <div>
-                            <label class="form-label d-block invisible ">Filter</label>
-                            <button type="submit" class="px-3 py-1 rounded font-semibold transition ">Filter</button>
+                            <label class="form-label d-block invisible dark:text-white">Filter</label>
+                            <button type="submit" class="px-3 py-1 rounded font-semibold transition dark:text-white">Filter</button>
 
                         </div>
                     </div>

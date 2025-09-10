@@ -46,6 +46,11 @@
         </div>
 
         <div class="flex justify-between pt-4">
+            <a href="{{ route('admin.nomormeja') }}"
+                class="bg-white text-black font-bold px-6 py-2 rounded border border-gray-300 hover:bg-gray-200 transition flex items-center gap-2">
+                <i class="fas fa-arrow-left"></i>
+                Back
+            </a>
             <button type="reset"
                 class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
                 Hapus
