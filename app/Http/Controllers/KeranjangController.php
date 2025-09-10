@@ -27,18 +27,22 @@ class KeranjangController extends Controller
     {
         $request->validate([
             'menu_id' => 'required|exists:menus,id',
+            'quantity' => 'nullable|integer|min:1',
         ]);
 
         $menu = Menu::findOrFail($request->menu_id);
 
         $sessionId = $request->session()->getId();
 
+        // ambil quantity dari request, default = 1
+        $jumlah = $request->input('quantity', 1);
+
         $keranjang = Keranjang::where('menu_id', $request->menu_id)
             ->where('session_id', $sessionId)
             ->first();
 
         if ($keranjang) {
-            $keranjang->jumlah += 1;
+            $keranjang->jumlah += $jumlah;
             $keranjang->total_harga = $keranjang->jumlah * $menu->harga;
             $keranjang->save();
         } else {
@@ -46,8 +50,8 @@ class KeranjangController extends Controller
                 'session_id' => $sessionId,
                 'menu_id' => $request->menu_id,
                 'harga_satuan' => $menu->harga,
-                'jumlah' => 1,
-                'total_harga' => $menu->harga,
+                'jumlah' => $jumlah,
+                'total_harga' => $menu->harga * $jumlah,
             ]);
         }
 
@@ -107,4 +111,26 @@ class KeranjangController extends Controller
 
         return redirect()->back()->with('success', "Pemesanan berhasil, silakan bayar nanti sebesar Rp. $totalBayar");
     }
+
+    public function update(Request $request, $id)
+{
+    $keranjang = Keranjang::findOrFail($id);
+
+    // aksi sesuai tombol
+    if ($request->action === 'increment') {
+        $keranjang->jumlah += 1;
+    } elseif ($request->action === 'decrement' && $keranjang->jumlah > 1) {
+        $keranjang->jumlah -= 1;
+    } else {
+        $keranjang->jumlah = $request->jumlah; // fallback jika user langsung edit input
+    }
+
+    // update total harga
+    $keranjang->total_harga = $keranjang->jumlah * $keranjang->harga_satuan;
+    $keranjang->save();
+
+    return back()->with('success', 'Jumlah keranjang berhasil diperbarui.');
+}
+
+
 }

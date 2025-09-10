@@ -13,9 +13,6 @@
 
 <body class="bg-gray-100 dark:bg-gray-900">
 
-
-    
-
     <!-- Tab Kategori -->
 
         <nav class="border-gray-200 bg-gray-50 dark:bg-gray-800 dark:border-gray-700">
@@ -92,8 +89,8 @@
             <div class="px-4 py-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                 @forelse ($kategoris as $kategori)
                     @foreach ($kategori->menus as $menu)
-                        <div data-nama="{{ strtolower($menu->nama) }}"
-                            class="menu-item w-full max-w-sm bg-white border border-gray-200 rounded-lg shadow-sm hover:shadow-lg">
+                        <div data-nama="{{ strtolower($menu->nama) }}" onclick="window.location.href='{{ route('customer.deskripsi', $menu->id) }}' " 
+                            class="cursor-pointer menu-item w-full max-w-sm bg-white border border-gray-200 rounded-lg shadow-sm hover:shadow-lg">
                             <a href="#">
                                 <img class="p-4 rounded-t-lg w-full h-90 aspect-square object-cover"
                                     src="{{ asset($menu->gambar) }}" alt="{{ $menu->nama }}" />

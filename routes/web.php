@@ -20,10 +20,15 @@ Route::get(
     }
 );
 
+Route::get('/customer/menu/{id}', [MenuController::class, 'deskripsi'])->name('customer.deskripsi');
 Route::get('customer/keranjang', [KeranjangController::class, 'index'])->name('customer.keranjang.view');
 Route::post('/customer/keranjang/add', [KeranjangController::class, 'addToCart'])->name('customer.keranjang.add');
 Route::delete('/customer/keranjang/{id}', [KeranjangController::class, 'destroy'])->name('customer.keranjang.delete');
 Route::post('/customer/keranjang/checkout', [KeranjangController::class, 'checkout'])->name('customer.keranjang.checkout');
+Route::put('/keranjang/{id}/update', [KeranjangController::class, 'update'])->name('customer.keranjang.update');
+
+
+
 
 Route::get('/dashboard', function () {
     return view('dashboard');

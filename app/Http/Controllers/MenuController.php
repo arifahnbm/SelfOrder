@@ -48,11 +48,13 @@ class MenuController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Menu $menu)
+    public function deskripsi($id)
     {
-        //
+        $menu = Menu::findOrFail($id);
+        // dd($menu);
+        return view('customer.deskripsi', compact('menu'));
     }
-
+    
     /**
      * Show the form for editing the specified resource.
      */
