@@ -1,4 +1,4 @@
-<nav class="border-gray-200 bg-white dark:bg-gray-800 dark:border-gray-700">
+<nav class="border-blue-200 bg-white dark:bg-gray-800 dark:border-blue-700">
         <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
             {{-- Tombol back --}}
                 <a href="{{ route('customer.menu') }}" 

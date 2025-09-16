@@ -617,7 +617,7 @@
             <img src="{{asset('src/avatar/avatar.jpg')}}" alt="User" />
           </span>
 
-          <span class="text-theme-sm mr-1 block font-medium"> Admin </span>
+          <span class="text-theme-sm mr-1 block font-medium"> {{ ucwords(Auth::user()->role) }} </span>
 
           <svg
             :class="dropdownOpen && 'rotate-180'"
@@ -647,12 +647,12 @@
             <span
               class="text-theme-sm block font-medium text-gray-700 dark:text-gray-400"
             >
-              Bapak
+              {{ Auth::user()->name }}
             </span>
             <span
               class="text-theme-xs mt-0.5 block text-gray-500 dark:text-gray-400"
             >
-              admin@gmail.com
+              {{ Auth::user()->email }}
             </span>
           </div>
 

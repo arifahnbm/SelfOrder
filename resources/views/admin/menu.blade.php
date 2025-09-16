@@ -31,7 +31,7 @@
     @include('admin.body.header')
 
     <div class="p-4">
-        <div class=" overflow-x-auto shadow-md sm:rounded-lg">
+        <div class=" overflow-x-auto  shadow-md sm:rounded-lg">
             <h2 class="text-center mb-5 font-bold dark:text-white">Daftar Menu </h2>
             <a href="{{ route('admin.tambah.menu') }}"
                 class="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-1 px-1 rounded mb-5 ml-5"> <i

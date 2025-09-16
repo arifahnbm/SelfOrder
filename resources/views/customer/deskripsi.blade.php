@@ -63,12 +63,12 @@
     </style>
 </head>
 
-<body class="bg-gray-100 text-gray-800">
+<body class="bg-blue-100 ">
 
     <!-- Navbar -->
     @include('customer.body.nav')
 
-    <div class="relative min-h-screen bg-gray-100 pb-28"> 
+    <div class="relative min-h-screen bg-blue-100 pb-28"> 
         <!-- padding bawah untuk ruang footer -->
 
         <!-- Card Konten -->
@@ -110,7 +110,7 @@
                     @csrf
                     <input type="hidden" name="menu_id" value="{{ $menu->id }}">
 
-                    <!-- Tombol jumlah -->
+                    <!-- Tombol QTY -->
                     <div class="flex items-center border border-gray-300 rounded-lg overflow-hidden">
                         <button type="button" onclick="decrementQty()" 
                             class="px-3 py-2 text-lg font-bold text-gray-600 hover:bg-gray-200 transition">-</button>

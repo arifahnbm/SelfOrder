@@ -323,11 +323,17 @@ class AdminController extends Controller
     }
 
     private function calculatePercentage($today, $yesterday)
-{
-    if ($yesterday == 0) {
-        return $today > 0 ? 100 : 0;
+    {
+        if ($yesterday == 0) {
+            return $today > 0 ? 100 : 0;
+        }
+
+        return (($today - $yesterday) / $yesterday) * 100;
     }
 
-    return (($today - $yesterday) / $yesterday) * 100;
-}
+    public function akunKasir()
+    {
+        $kasirs = DB::table('users')->where('role', 'kasir')->get();
+        return view('admin.akunkasir', compact('kasirs'));
+    }
 }

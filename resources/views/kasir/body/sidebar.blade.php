@@ -4,7 +4,7 @@
 
         {{-- sidebar header --}}
          <div class="sidebar-header flex items-center px-3 pt-5 pb-2 ">
-            <a href="{{ route('kasir.pesanan') }}">
+            <a href="{{ route('kasir.dashboard') }}">
             <span class="logo" >
                 <img class="dark:hidden" src="{{ asset('src/logo/logo-cashier.png')}}" alt="Logo">
                 <img class="hidden dark:block" src="{{ asset('src/logo/logocashier-dark.png')}}" alt="Logo">
@@ -20,11 +20,29 @@
             <ul class="mb-6 flex flex-col gap-4 font-medium">
                
                 <li>
+                    <a href="{{ route('kasir.dashboard') }}"
+                        class="flex items-center p-2 text-gray-900 rounded-lg group {{ request()->routeIs('kasir.dashboard') 
+                            ? 'bg-blue-100 text-blue-700 dark:bg-gray-700 dark:text-blue-400 ' 
+                            : 'text-gray-900 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700' }}">
+                        <svg class="w-5 h-5 transition duration-75 {{ request()->routeIs('kasir.dashboard') 
+                            ? 'text-blue-700 dark:text-blue-400 dark:group-hover:text-sky-300' 
+                            : 'text-gray-500 group-hover:text-gray-900 dark:text-gray-400 dark:group-hover:text-white' }}"
+                            aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor"
+                            viewBox="0 0 22 21">
+                            <path
+                                d="M16.975 11H10V4.025a1 1 0 0 0-1.066-.998 8.5 8.5 0 1 0 9.039 9.039.999.999 0 0 0-1-1.066h.002Z" />
+                            <path
+                                d="M12.5 0c-.157 0-.311.01-.565.027A1 1 0 0 0 11 1.02V10h8.975a1 1 0 0 0 1-.935c.013-.188.028-.374.028-.565A8.51 8.51 0 0 0 12.5 0Z" />
+                        </svg>
+                        <span class="flex-1 ms-3 whitespace-nowrap">Dasboard</span>
+                    </a>
+                </li>
+                <li>
                     <a href="{{ route('kasir.pesanan') }}"
                         class="flex items-center p-2 text-gray-900 rounded-lg group {{ request()->routeIs('kasir.pesanan') 
                             ? 'bg-blue-100 text-blue-700 dark:bg-gray-700 dark:text-blue-400 ' 
                             : 'text-gray-900 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700' }}">
-                        <svg class="shrink-0 w-5 h-5 text-gray-500 transition duration-75 {{ request()->routeIs('admin.dashboard') 
+                        <svg class="shrink-0 w-5 h-5 transition duration-75 {{ request()->routeIs('kasir.pesanan') 
                             ? 'text-blue-700 dark:text-blue-400 dark:group-hover:text-sky-300' 
                             : 'text-gray-500 group-hover:text-gray-900 dark:text-gray-400 dark:group-hover:text-white' }}"
                             aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor"

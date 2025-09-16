@@ -11,11 +11,11 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 
-<body class="bg-gray-100 dark:bg-gray-900">
+<body class="bg-blue-100 dark:bg-gray-900">
 
     <!-- Tab Kategori -->
 
-        <nav class="border-gray-200 bg-gray-50 dark:bg-gray-800 dark:border-gray-700">
+        <nav class="border-blue-200 bg-white dark:bg-gray-800 dark:border-blue-700">
             <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
                 {{-- Tombol back --}}
                 <a href="{{ route('customer.menu') }}" 
@@ -90,29 +90,39 @@
                 @forelse ($kategoris as $kategori)
                     @foreach ($kategori->menus as $menu)
                         <div data-nama="{{ strtolower($menu->nama) }}" onclick="window.location.href='{{ route('customer.deskripsi', $menu->id) }}' " 
-                            class="cursor-pointer menu-item w-full max-w-sm bg-white border border-gray-200 rounded-lg shadow-sm hover:shadow-lg">
-                            <a href="#">
-                                <img class="p-4 rounded-t-lg w-full h-90 aspect-square object-cover"
+                            class="cursor-pointer  menu-item w-full max-w-sm bg-white border border-gray-200 rounded-lg shadow-sm hover:shadow-lg transform transition duration-300 hover:scale-105 hover:-translate-y-1">
+                            <a href="{{ route('customer.deskripsi', $menu->id) }}" class="cursor-pointer">
+                                <img class="p-4 rounded-3xl w-full h-90 aspect-square object-cover"
                                     src="{{ asset($menu->gambar) }}" alt="{{ $menu->nama }}" />
                             </a>
                             <div class="px-5 pb-5">
-                                <a href="#">
-                                    <h5 class="text-xl font-semibold tracking-tight text-gray-900">{{ $menu->nama }}</h5>
-                                </a>
-                                <div class="flex items-center mt-2.5 mb-5">
-                                    <span
-                                        class="bg-blue-100 text-blue-800 text-xs font-semibold px-2.5 py-0.5 rounded-sm">5.0</span>
-                                </div>
-                                <div class="flex items-center justify-between">
-                                    <span class="text-3xl font-bold text-gray-900">
-                                        @php echo number_format($menu->harga, 0, ',', '.'); @endphp
+                                <div class="flex items-center justify-between mb-5">
+                                    <a href="{{ route('customer.deskripsi', $menu->id) }}">
+                                        <h5 class="text-xl font-semibold tracking-tight text-gray-900">{{ $menu->nama }}</h5>
+                                    </a>
+                                    <span class="text-3xl font-bold text-blue-700">
+                                       Rp. @php echo number_format($menu->harga, 0, ',', '.'); @endphp
                                     </span>
+                                </div>
+                                
+                                <div class="flex items-center justify-between mt-5 mb-5">
+                                    <!-- Tombol QTY -->
+                                    <div class="flex items-center border border-gray-300 rounded-lg overflow-hidden">
+                                        <button type="button" onclick="decrementQty()" 
+                                            class="px-3 py-2 text-lg font-bold text-gray-600 hover:bg-gray-200 transition">-</button>
+                                        
+                                        <input id="quantity" type="number" name="quantity" value="1" min="1"
+                                            class="w-12 text-center border-0 focus:ring-0 focus:outline-none text-gray-900">
+                                        
+                                        <button type="button" onclick="incrementQty()" 
+                                            class="px-3 py-2 text-lg font-bold text-gray-600 hover:bg-gray-200 transition">+</button>
+                                    </div>
                                     @if(strtolower($menu->stok) === 'tersedia')
                                         <form action="{{ route('customer.keranjang.add', $menu->id) }}" method="POST">
                                             @csrf
                                             <input type="hidden" name="menu_id" value="{{ $menu->id }}">
                                             <button type="submit"
-                                                class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">
+                                                class="text-white bg-blue-400 hover:bg-blue-600 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">
                                                 Tambah
                                             </button>
                                         </form>
@@ -145,31 +155,39 @@
                     @endif
 
                     @foreach ($kategori->menus as $menu)
-                        <div data-nama="{{ strtolower($menu->nama) }}"
-                            class="menu-item w-full max-w-sm bg-white border border-gray-200 rounded-lg shadow-sm hover:shadow-lg">
-                            <a href="#">
-                                <img class="p-4 rounded-t-lg w-full h-90 aspect-square object-cover"
+                        <div data-nama="{{ strtolower($menu->nama) }} " onclick="window.location.href='{{ route('customer.deskripsi', $menu->id) }}' "
+                            class="menu-item w-full max-w-sm bg-white border border-gray-200 rounded-lg shadow-sm hover:shadow-lg transform transition duration-300 hover:scale-105 hover:-translate-y-1">
+                            <a href="{{ route('customer.deskripsi', $menu->id) }}">
+                                <img class="p-4 rounded-3xl w-full h-90 aspect-square object-cover"
                                     src="{{ asset($menu->gambar) }}" alt="{{ $menu->nama }}" />
                             </a>
                             <div class="px-5 pb-5">
-                                <a href="#">
-                                    <h5 class="text-xl font-semibold tracking-tight text-gray-900">{{ $menu->nama }}
-                                    </h5>
-                                </a>
-                                <div class="flex items-center mt-2.5 mb-5">
-                                    <span
-                                        class="bg-blue-100 text-blue-800 text-xs font-semibold px-2.5 py-0.5 rounded-sm">5.0</span>
-                                </div>
-                                <div class="flex items-center justify-between">
-                                    <span class="text-3xl font-bold text-gray-900">
-                                        @php echo number_format($menu->harga, 0, ',', '.'); @endphp
+                                <div class="flex items-center justify-between mb-5">
+                                    <a href="{{ route('customer.deskripsi', $menu->id) }}">
+                                        <h5 class="text-xl font-semibold tracking-tight text-gray-900">{{ $menu->nama }}</h5>
+                                    </a>
+                                    <span class="text-3xl font-bold text-blue-700">
+                                       Rp. @php echo number_format($menu->harga, 0, ',', '.'); @endphp
                                     </span>
+                                </div>
+                                <div class="flex items-center justify-between mt-5 mb-5">
+                                    <!-- Tombol QTY -->
+                                    <div class="flex items-center border border-gray-300 rounded-lg overflow-hidden">
+                                        <button type="button" onclick="decrementQty()" 
+                                            class="px-3 py-2 text-lg font-bold text-gray-600 hover:bg-gray-200 transition">-</button>
+                                        
+                                        <input id="quantity" type="number" name="quantity" value="1" min="1"
+                                            class="w-12 text-center border-0 focus:ring-0 focus:outline-none text-gray-900">
+                                        
+                                        <button type="button" onclick="incrementQty()" 
+                                            class="px-3 py-2 text-lg font-bold text-gray-600 hover:bg-gray-200 transition">+</button>
+                                    </div>
                                     @if(strtolower($menu->stok) === 'tersedia')
                                     <form action="{{ route('customer.keranjang.add', $menu->id) }}" method="POST">
                                         @csrf
                                         <input type="hidden" name="menu_id" value="{{ $menu->id }}">
                                         <button type="submit"
-                                            class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">
+                                            class="text-white bg-blue-400 hover:bg-blue-600 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">
                                             Tambah
                                         </button>
                                     </form>
@@ -187,6 +205,29 @@
                 </div>
             </div>
         @endforeach
+
+        <div class="bg-blue-700 p-6 max-w-full mx-auto mt-10 shadow-lg">
+            <div class="bg-white rounded-lg shadow mx-5 my-8 p-6">
+                <h2 class="text-xl font-bold text-gray-800 mb-4">Tulis Masukan Anda</h2>
+
+                <form action="#" method="POST" class="space-y-4">
+                    <!-- Nama (opsional) -->
+                    <input type="text" name="nama" placeholder="Nama (opsional)"
+                        class="w-full border border-gray-300 rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-blue-400">
+
+                    <!-- Komentar/Saran -->
+                    <textarea name="komentar" placeholder="Komentar atau saran..."
+                        class="w-full border border-gray-300 rounded-lg p-2 h-28 resize-none focus:outline-none focus:ring-2 focus:ring-blue-400"></textarea>
+
+                    <!-- Tombol Submit -->
+                    <button type="submit"
+                        class="bg-blue-400 text-white font-semibold px-6 py-2 rounded-lg hover:bg-blue-600 transition">
+                        Kirim
+                    </button>
+                </form>
+            </div>
+        </div>
+
 
         <!-- Script: Pencarian -->
         <script>
@@ -225,7 +266,7 @@
 
         // Reset semua tab ke default (putih abu-abu)
         document.querySelectorAll('.kategori-tab').forEach(el => {
-            el.classList.remove('bg-blue-600', 'text-white', 'active');
+            el.classList.remove('bg-blue-400', 'text-white', 'active');
             el.classList.add('bg-white', 'text-gray-600');
         });
 
@@ -233,7 +274,7 @@
         const tabEl = document.getElementById('tab-' + category);
         if (tabEl) {
             tabEl.classList.remove('bg-white', 'text-gray-600');
-            tabEl.classList.add('bg-blue-600', 'text-white', 'active');
+            tabEl.classList.add('bg-blue-400', 'text-white', 'active');
         }
     }
 

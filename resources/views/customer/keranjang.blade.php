@@ -9,7 +9,7 @@
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
 </head>
 
-<body class="bg-gray-50" x-data="{ toast: '', showToast: false }">
+<body class="bg-blue-100" x-data="{ toast: '', showToast: false }">
 
     @include('customer.body.nav')
 
