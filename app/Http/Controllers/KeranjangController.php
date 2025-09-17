@@ -20,7 +20,13 @@ class KeranjangController extends Controller
         $nomor_mejas = NomorMeja::where('status', 'tersedia')->orderBy('nomor')->get();
         $keranjangs = Keranjang::where('session_id', $sessionId)->with('menu')->get();
         $totalBayar = $keranjangs->sum('total_harga');
-        return view('customer.keranjang', compact('keranjangs', 'totalBayar', 'nomor_mejas'));
+
+        // Tambahan untuk popup detail
+        $pesanan = Transaksi::where('session_id', $sessionId)
+            ->orderBy('created_at', 'desc')
+            ->first();
+
+        return view('customer.keranjang', compact('keranjangs', 'totalBayar', 'nomor_mejas', 'pesanan'));
     }
     
     public function addToCart(Request $request)
@@ -77,7 +83,7 @@ class KeranjangController extends Controller
         //     "nomor_meja"=>"unique:transaksis,nomor_meja,required",
         // ]);
         if ($keranjangs->isEmpty()) {
-            return redirect()->back()->with('error', 'Keranjang kosong, tidak ada yang bisa dibayar.');
+            return redirect()->back()->with('error', 'Keranjang kosong, pilih menu terlebih dahulu.');
         }
 
         $totalBayar = $keranjangs->sum('total_harga');
@@ -109,7 +115,7 @@ class KeranjangController extends Controller
 
         Keranjang::where('session_id', $sessionId)->delete();
 
-        return redirect()->back()->with('success', "Pemesanan berhasil, silakan bayar nanti sebesar Rp. $totalBayar");
+        return redirect()->route('customer.keranjang')->with('success', "Pemesanan berhasil, silakan bayar nanti sebesar Rp. $totalBayar");
     }
 
     public function update(Request $request, $id)

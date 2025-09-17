@@ -9,6 +9,22 @@
     <title>Warung Seblang | Menu</title>
     <script src="https://cdn.tailwindcss.com"></script>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
+    <style>
+        /* Toast Animation */
+        .toast {
+            animation: slideIn 0.5s, fadeOut 0.5s 3s forwards;
+        }
+
+        @keyframes slideIn {
+            from { transform: translateX(100%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+
+        @keyframes fadeOut {
+            from { opacity: 1; }
+            to { opacity: 0; transform: translateX(100%); }
+        }
+    </style>
 </head>
 
 <body class="bg-blue-100 dark:bg-gray-900">
@@ -138,7 +154,14 @@
                         </div>
                     @endforeach
                 @empty
-                    <p class="text-red-500">Tidak ada menu tersedia.</p>
+                    <div class="flex flex-col items-center justify-center py-10">
+                        <p class="text-gray-600 text-xl font-semibold">
+                            Tidak ada menu yang tersedia
+                        </p>
+                        <img src="{{ asset('src/images/empty-menu.png') }}" 
+                            alt="Tidak ada menu" 
+                            class="w-48 h-48 object-contain mb-4 opacity-80">
+                    </div>
                 @endforelse
             </div>
         </div>
@@ -150,10 +173,6 @@
             <div class="kategori-content {{ $index == 0 ? '' : 'hidden' }}" id="kategori-{{ $kategoriId }}">
                 <h2 class="text-2xl font-bold text-gray-900 mt-8 ml-4">{{ $kategori->nama }}</h2>
                 <div class="px-4 py-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                    @if ($kategori->menus->isEmpty())
-                        <p class="text-red-500">Tidak ada menu di kategori ini.</p>
-                    @endif
-
                     @foreach ($kategori->menus as $menu)
                         <div data-nama="{{ strtolower($menu->nama) }} " onclick="window.location.href='{{ route('customer.deskripsi', $menu->id) }}' "
                             class="menu-item w-full max-w-sm bg-white border border-gray-200 rounded-lg shadow-sm hover:shadow-lg transform transition duration-300 hover:scale-105 hover:-translate-y-1">
@@ -203,6 +222,16 @@
                         </div>
                     @endforeach
                 </div>
+                @if ($kategori->menus->isEmpty())
+                    <div class="flex flex-col w-full items-center justify-center py-10">
+                        <h1 class="text-gray-600 text-xl font-semibold">
+                            Tidak ada menu yang tersedia
+                        </h1>
+                        <img src="{{ asset('src/images/empty-menu.png') }}" 
+                            alt="Tidak ada menu" 
+                            class="w-48 h-48 object-contain mb-4 opacity-80">
+                    </div>
+                @endif
             </div>
         @endforeach
 
@@ -227,6 +256,52 @@
                 </form>
             </div>
         </div>
+        <!-- Toast Container -->
+    <div id="toast-container" class="fixed top-5 right-5 space-y-2 z-50"></div>
+
+    <script>
+        // Jika session success/error, munculkan toast
+        @if (session('success'))
+            // fungsi toast
+            function showToast(message) {
+                const container = document.getElementById("toast-container");
+                const toast = document.createElement("div");
+                toast.className = "toast bg-blue-600 text-white px-4 py-2 rounded-lg shadow-md";
+                toast.innerText = message;
+                container.appendChild(toast);
+
+                // auto remove setelah animasi selesai
+                setTimeout(() => {
+                    toast.remove();
+                }, 4000);
+            }
+
+            // cek apakah ada session flash dari Laravel
+            @if(session('success'))
+                showToast("{{ session('success') }}");
+            @endif
+        @endif
+
+        @if (session('error'))
+                function showToast(message) {
+                const container = document.getElementById("toast-container");
+                const toast = document.createElement("div");
+                toast.className = "toast bg-red-600 text-white px-4 py-2 rounded-lg shadow-md";
+                toast.innerText = message;
+                container.appendChild(toast);
+
+                // auto remove setelah animasi selesai
+                setTimeout(() => {
+                    toast.remove();
+                }, 4000);
+            }
+
+            // cek apakah ada session flash dari Laravel
+            @if(session('error'))
+                showToast("{{ session('error') }}");
+            @endif
+        @endif
+    </script>
 
 
         <!-- Script: Pencarian -->

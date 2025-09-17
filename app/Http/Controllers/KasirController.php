@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Transaksi;
+use App\Models\NomorMeja;
 use Illuminate\Http\Request;
 
 class KasirController extends Controller
@@ -46,7 +47,7 @@ class KasirController extends Controller
         $transaksi->nomor_meja->save();
     }
 
-        dd($transaksi);
+        // dd($transaksi);
     
 
     return redirect()->back()->with('success', 'Pembayaran berhasil diproses.');
@@ -62,6 +63,16 @@ class KasirController extends Controller
     public function destroy($id)
     {
         $transaksi = Transaksi::findOrFail($id);
+
+        // Update status nomor meja 
+        if ($transaksi->nomor_meja) {
+            $meja = NomorMeja::where('nomor', $transaksi->nomor_meja)->first();
+            if ($meja) {
+                $meja->status = 'tersedia';
+                $meja->save();
+            }
+        }
+
         $transaksi->delete();
 
         return redirect()->route('kasir.pesanan')->with('success', 'Pesanan berhasil dihapus.');

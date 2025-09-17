@@ -68,7 +68,7 @@
       </button> --}}
       <!-- Hamburger Toggle BTN -->
 
-      <a href="index.html" class="lg:hidden">
+      <a href="" class="lg:hidden">
         <img class="dark:hidden" src="./images/logo/logo.svg" alt="Logo" />
         <img
           class="hidden dark:block"
