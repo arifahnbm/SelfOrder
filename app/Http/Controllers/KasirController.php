@@ -65,7 +65,7 @@ class KasirController extends Controller
         $transaksi = Transaksi::findOrFail($id);
 
         // Update status nomor meja 
-        if ($transaksi->nomor_meja) {
+        if ($transaksi->status_bayar === 'belum bayar' && $transaksi->nomor_meja) {
             $meja = NomorMeja::where('nomor', $transaksi->nomor_meja)->first();
             if ($meja) {
                 $meja->status = 'tersedia';
