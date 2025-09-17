@@ -26,6 +26,8 @@ class MenuController extends Controller
             }
         }])->get();
 
+        
+
         return view('home', compact('kategoris'));
     }
 

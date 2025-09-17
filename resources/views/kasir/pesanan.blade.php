@@ -94,6 +94,9 @@
                         <th scope="col" class="px-6 py-3">
                             Status Pembayaran
                         </th>
+                        <th scope="col" class="px-6 py-3">
+                            Kasir
+                        </th>
                     </tr>
                 </thead>
                 <tbody>
@@ -138,6 +141,14 @@
                                     </button>
                                 </form>
                             </td>
+                            <td class="px-6 py-4">
+                                @if($transaksi->kasir)
+                                    {{ $transaksi->kasir->id }} - {{ $transaksi->kasir->name }}
+                                @else
+                                    Kasir tidak ada
+                                @endif
+                            </td>
+
                         </tr>
                     @endforeach
 

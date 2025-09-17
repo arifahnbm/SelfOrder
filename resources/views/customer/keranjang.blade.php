@@ -166,6 +166,7 @@
         </div>
     </div>
 
+    @if ($pesanan)
     <div id="popUpAdd" class="hidden fixed inset-0 z-50 flex items-center justify-center">
         <!-- Overlay -->
         <div class="absolute inset-0 bg-black bg-opacity-50" onclick="hidePopUpAdd()"></div>
@@ -181,7 +182,7 @@
             <h1 class="text-xl font-bold text-blue-900 dark:text-white mb-4">Ringkasan <p class="font-medium">Pesanan Anda</p></h1>
             <!-- Info tanggal & meja -->
             <div class="mb-4 text-sm text-gray-700 dark:text-gray-300">
-                <p><b>Tanggal:</b> {{ $pesanan->created_at->format('d M Y H:i') }}</p>
+                <p><b>Tanggal:</b> {{ $pesanan->created_at?->format('d M Y H:i') ?? 'Tanggal tidak tersedia' }}</p>
                 <p><b>Nomor Meja:</b> {{ $pesanan->nomor_meja }}</p>
             </div>
             <!-- Daftar pesanan -->
@@ -213,6 +214,7 @@
             </div>
         </div>
     </div>
+    @endif
 
     <!-- Toast Notification -->
     <!-- Toast Container -->
