@@ -91,7 +91,72 @@
                     <p class="mt-4 text-gray-600 leading-relaxed">
                         {{ $menu->deskripsi }}
                     </p>
+                    <button onclick="showPopUpAdd()" class="bg-blue-600 text-white border mt-8  px-4 py-2 rounded-lg hover:bg-blue-800 transition">
+                        Beri Rating & Review
+                    </button>
                 </div>
+            </div>
+        </div>
+
+        <div id="popUpAdd" class="hidden fixed inset-0 z-50 flex items-center justify-center">
+            <!-- Overlay -->
+            <div class="absolute inset-0 bg-black bg-opacity-50" onclick="hidePopUpAdd()"></div>
+
+            <!-- Modal content -->
+            <div class="relative bg-white dark:bg-gray-800 rounded-lg shadow-lg w-full max-w-md z-10 p-6">
+                <!-- Close button -->
+                <button onclick="hidePopUpAdd()"
+                    class="absolute top-2 right-2 text-gray-500 hover:text-gray-700 dark:hover:text-white text-xl font-bold">
+                    &times;
+                </button>
+
+                <h1 class="text-xl font-bold text-blue-900 dark:text-white mb-4">Beri Masukan untuk Menu</h1>
+                <!-- ================= FORM REVIEW ================= -->
+                <form action="{{ route('review.menu.store') }}" method="POST" class="space-y-4">
+                    @csrf
+                    <input type="hidden" name="menu_id" value="{{ $menu->id }}">
+
+                    <input type="text" name="nama" placeholder="Nama (opsional)" class="w-full border border-gray-300 rounded-lg p-2">
+
+                    <!-- Rating -->
+                    <div>
+                        <label class="block text-sm font-bold text-gray-900 dark:text-gray-100 mb-2">Beri Rating</label>
+                        <div class="flex space-x-2">
+                            @for ($i = 1; $i <= 5; $i++)
+                                <label>
+                                    <input type="radio" name="rating" value="{{ $i }}" class="hidden peer" required>
+                                    <svg class="w-8 h-8 cursor-pointer text-gray-300 peer-checked:text-yellow-400 hover:text-yellow-500 transition"
+                                        fill="currentColor" viewBox="0 0 20 20">
+                                        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 
+                                                1 0 00.95.69h3.462c.969 0 1.371 1.24.588 
+                                                1.81l-2.8 2.034a1 1 0 00-.364 
+                                                1.118l1.07 3.292c.3.921-.755 
+                                                1.688-1.54 1.118l-2.8-2.034a1 
+                                                1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 
+                                                1 0 00-.364-1.118l-2.8-2.034c-.783-.57-.38-1.81.588-1.81h3.461a1 
+                                                1 0 00.951-.69l1.07-3.292z"/>
+                                    </svg>
+                                </label>
+                            @endfor
+                        </div>
+                    </div>
+
+                    <!-- Komentar -->
+                    <div>
+                        <label for="komentar" class="block text-sm font-bold text-gray-900 dark:text-gray-100 mb-2">Komentar</label>
+                        <textarea name="komentar" id="komentar" rows="3" 
+                                class="w-full p-2 border rounded-lg focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
+                                placeholder="Tulis komentar Anda tentang menu ini..."></textarea>
+                    </div>
+
+                    <!-- Tombol submit -->
+                    <div class="flex justify-end">
+                        <button type="submit"
+                            class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-800 transition">
+                            Kirim Review
+                        </button>
+                    </div>
+                </form>
             </div>
         </div>
 
@@ -192,6 +257,16 @@
         @if(session('success'))
             showToast("{{ session('success') }}");
         @endif
+    </script>
+
+    <script>
+        function showPopUpAdd() {
+            document.getElementById('popUpAdd').classList.remove('hidden');
+        }
+
+        function hidePopUpAdd() {
+            document.getElementById('popUpAdd').classList.add('hidden');
+        }
     </script>
 </body>
 </html>

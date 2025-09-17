@@ -103,6 +103,7 @@ class KeranjangController extends Controller
             'nomor_meja' => $request->nomor_meja,
             'session_id' => $sessionId,
             'details' => $details->toJson(),
+            'catatan_pesanan' => $request->catatan_pesanan,
         ]);
 
         // Update nomor meja menjadi tidak tersedia

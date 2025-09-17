@@ -23,7 +23,7 @@ return new class extends Migration
             $table->string('status')->default('aktif');
             $table->string('status_bayar')->default('belum bayar');
             $table->json('details');
-
+            $table->text('catatan_pesanan')->nullable();
             // kolom baru untuk kasir
             $table->unsignedBigInteger('kasir_id')->nullable(); 
             $table->foreign('kasir_id')->references('id')->on('users')->onDelete('set null');

@@ -8,6 +8,7 @@ use App\Http\Controllers\PesananController;
 use App\Http\Controllers\TransaksiController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\KelolaKasirController;
+use App\Http\Controllers\ReviewController;
 use Illuminate\Support\Facades\Route;
 
 Route::get(
@@ -27,6 +28,8 @@ Route::post('/customer/keranjang/add', [KeranjangController::class, 'addToCart']
 Route::delete('/customer/keranjang/{id}', [KeranjangController::class, 'destroy'])->name('customer.keranjang.delete');
 Route::post('/customer/keranjang/checkout', [KeranjangController::class, 'checkout'])->name('customer.keranjang.checkout');
 Route::put('/keranjang/{id}/update', [KeranjangController::class, 'update'])->name('customer.keranjang.update');
+Route::post('/review/general', [ReviewController::class, 'storeGeneral'])->name('review.general.store');
+Route::post('/review/menu', [ReviewController::class, 'storeMenu'])->name('review.menu.store');
 
 
 
@@ -76,7 +79,8 @@ Route::middleware('auth')->group(function () {
     // Route::get('/admin/akunkasir', [AdminController::class, 'akunKasir'])->name('admin.akunkasir');
     Route::get('/admin/kelolakasir', [KelolaKasirController::class, 'index'])->name('admin.kelolakasir');
 
-     Route::post('/admin/kelolakasir/tambah', [KelolaKasirController::class, 'tambahkasir'])->name('admin.kelolakasir.tambah');
+    Route::post('/admin/kelolakasir/tambah', [KelolaKasirController::class, 'tambahkasir'])->name('admin.kelolakasir.tambah');
+    Route::get('/admin/reviews', [ReviewController::class, 'index'])->name('admin.reviews');
 });
 
 

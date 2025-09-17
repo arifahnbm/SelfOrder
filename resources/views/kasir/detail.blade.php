@@ -55,6 +55,13 @@
         <div class="text-right text-xl font-bold">
             Total Bayar: @php echo number_format($pesanan->total_bayar, 0, ',', '.'); @endphp
         </div>
+        <div class="mb-4">
+            <h3 class="font-bold text-gray-900">Catatan Pesanan:</h3>
+            <p class="text-gray-700">
+                {{ $pesanan->catatan_pesanan ?? '-' }}
+            </p>
+        </div>
+
 
         
 

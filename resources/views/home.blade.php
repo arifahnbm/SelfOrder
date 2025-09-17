@@ -108,8 +108,7 @@
                 @endphp
                 
                     @foreach ($allMenus as $menu)
-                        <div data-nama="{{ strtolower($menu->nama) }}" 
-                            onclick="window.location.href='{{ route('customer.deskripsi', $menu->id) }}'" 
+                        <div data-nama="{{ strtolower($menu->nama) }}"  
                             class="cursor-pointer menu-item w-full max-w-sm bg-white border border-gray-200 rounded-lg shadow-sm hover:shadow-lg transform transition duration-300 hover:scale-105 hover:-translate-y-1">
                             <a href="{{ route('customer.deskripsi', $menu->id) }}" class="cursor-pointer">
                                 <img class="p-4 rounded-3xl w-full h-90 aspect-square object-cover"
@@ -126,6 +125,8 @@
                                 </div>
                                 <div class="flex items-center justify-between mt-5 mb-5">
                                     <div class="flex items-center border border-gray-300 rounded-lg overflow-hidden">
+                                        <form action="{{ route('customer.keranjang.add', $menu->id) }}" method="POST">
+                                        @csrf
                                         <button type="button" onclick="decrementQty()" 
                                             class="px-3 py-2 text-lg font-bold text-gray-600 hover:bg-gray-200 transition">-</button>
                                         <input id="quantity" type="number" name="quantity" value="1" min="1"
@@ -134,8 +135,6 @@
                                             class="px-3 py-2 text-lg font-bold text-gray-600 hover:bg-gray-200 transition">+</button>
                                     </div>
                                     @if(strtolower($menu->stok) === 'tersedia')
-                                        <form action="{{ route('customer.keranjang.add', $menu->id) }}" method="POST">
-                                            @csrf
                                             <input type="hidden" name="menu_id" value="{{ $menu->id }}">
                                             <button type="submit"
                                                 class="text-white bg-blue-400 hover:bg-blue-600 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">
@@ -174,7 +173,7 @@
                 <h2 class="text-2xl font-bold text-gray-900 mt-8 ml-4">{{ $kategori->nama }}</h2>
                 <div class="px-4 py-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                     @foreach ($kategori->menus as $menu)
-                        <div data-nama="{{ strtolower($menu->nama) }} " onclick="window.location.href='{{ route('customer.deskripsi', $menu->id) }}' "
+                        <div data-nama="{{ strtolower($menu->nama) }} " 
                             class="menu-item w-full max-w-sm bg-white border border-gray-200 rounded-lg shadow-sm hover:shadow-lg transform transition duration-300 hover:scale-105 hover:-translate-y-1">
                             <a href="{{ route('customer.deskripsi', $menu->id) }}">
                                 <img class="p-4 rounded-3xl w-full h-90 aspect-square object-cover"
@@ -190,20 +189,21 @@
                                     </span>
                                 </div>
                                 <div class="flex items-center justify-between mt-5 mb-5">
-                                    <!-- Tombol QTY -->
-                                    <div class="flex items-center border border-gray-300 rounded-lg overflow-hidden">
-                                        <button type="button" onclick="decrementQty()" 
-                                            class="px-3 py-2 text-lg font-bold text-gray-600 hover:bg-gray-200 transition">-</button>
-                                        
-                                        <input id="quantity" type="number" name="quantity" value="1" min="1"
-                                            class="w-12 text-center border-0 focus:ring-0 focus:outline-none text-gray-900">
-                                        
-                                        <button type="button" onclick="incrementQty()" 
-                                            class="px-3 py-2 text-lg font-bold text-gray-600 hover:bg-gray-200 transition">+</button>
-                                    </div>
+                                        <!-- Tombol QTY -->
+                                        <div class="flex items-center border border-gray-300 rounded-lg overflow-hidden">
+                                            <form action="{{ route('customer.keranjang.add', $menu->id) }}" method="POST">
+                                            @csrf
+                                            <button type="button" onclick="decrementQty()" 
+                                                class="px-3 py-2 text-lg font-bold text-gray-600 hover:bg-gray-200 transition">-</button>
+                                            
+                                            <input id="quantity" type="number" name="quantity" value="1" min="1"
+                                                class="w-12 text-center border-0 focus:ring-0 focus:outline-none text-gray-900">
+                                            
+                                            <button type="button" onclick="incrementQty()" 
+                                                class="px-3 py-2 text-lg font-bold text-gray-600 hover:bg-gray-200 transition">+</button>
+                                        </div>
                                     @if(strtolower($menu->stok) === 'tersedia')
-                                    <form action="{{ route('customer.keranjang.add', $menu->id) }}" method="POST">
-                                        @csrf
+                                    
                                         <input type="hidden" name="menu_id" value="{{ $menu->id }}">
                                         <button type="submit"
                                             class="text-white bg-blue-400 hover:bg-blue-600 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">
@@ -239,7 +239,8 @@
             <div class="bg-white rounded-lg shadow mx-5 my-8 p-6">
                 <h2 class="text-xl font-bold text-gray-800 mb-4">Tulis Masukan Anda</h2>
 
-                <form action="#" method="POST" class="space-y-4">
+                <form action="{{ route('review.general.store') }}" method="POST" class="space-y-4">
+                    @csrf
                     <!-- Nama (opsional) -->
                     <input type="text" name="nama" placeholder="Nama (opsional)"
                         class="w-full border border-gray-300 rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-blue-400">
@@ -358,6 +359,41 @@
         const firstTab = document.querySelector('.kategori-tab');
         if (firstTab) firstTab.click();
     });
+</script>
+<script>
+    function incrementQty() {
+        let qty = document.getElementById('quantity');
+        qty.value = parseInt(qty.value) + 1;
+
+        // Animasi
+        qty.classList.add("flash");
+        qty.previousElementSibling.classList.add("bounce");
+        qty.nextElementSibling.classList.add("bounce");
+
+        setTimeout(() => {
+            qty.classList.remove("flash");
+            qty.previousElementSibling.classList.remove("bounce");
+            qty.nextElementSibling.classList.remove("bounce");
+        }, 400);
+    }
+
+    function decrementQty() {
+        let qty = document.getElementById('quantity');
+        if (parseInt(qty.value) > 1) {
+            qty.value = parseInt(qty.value) - 1;
+
+            // Animasi
+            qty.classList.add("flash");
+            qty.previousElementSibling.classList.add("bounce");
+            qty.nextElementSibling.classList.add("bounce");
+
+            setTimeout(() => {
+                qty.classList.remove("flash");
+                qty.previousElementSibling.classList.remove("bounce");
+                qty.nextElementSibling.classList.remove("bounce");
+            }, 400);
+        }
+    }
 </script>
 
 
